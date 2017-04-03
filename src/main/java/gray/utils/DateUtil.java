@@ -308,4 +308,53 @@ public class DateUtil {
         }
         return -1;
     }
+
+    /**
+     * 判断某天是否落在两个日期之间
+     * @param dateCurr
+     * @param dateStart
+     * @param dateEnd
+     * @return
+     */
+    public static boolean isDateBetween(Date dateCurr, Date dateStart, Date dateEnd) {
+        int dayDiff = dateDiff(dateStart, dateCurr, Calendar.DATE);
+        if (dayDiff < 0)
+            return false;
+        dayDiff = dateDiff(dateCurr, dateEnd, Calendar.DATE);
+        if (dayDiff < 0)
+            return false;
+        return true;
+    }
+
+    /**
+     * 判断某年是否为闰年
+     * @param year
+     * @return
+     */
+    public static boolean isLeapYear(int year) {
+        boolean isLeep = false;
+        if ((year % 4 == 0) && (year % 100 != 0)) {
+            isLeep = true;
+        } else if (year % 400 == 0) {
+            isLeep = true;
+        } else {
+            isLeep = false;
+        }
+        return isLeep;
+    }
+
+    /**
+     * 把字符串日期数组转换成date类型的日期数组
+     * @param dateList
+     * @param format
+     * @return
+     */
+    public static Date[] stringToDateList(String[] dateList, String format){
+        if(null == dateList || 0 == dateList.length) return null;
+        Date[] date = new Date[dateList.length];
+        for(int i = 0 ; i< date.length ; i++){
+            date[i] = parseDate(dateList[i],format);
+        }
+        return date;
+    }
 }
