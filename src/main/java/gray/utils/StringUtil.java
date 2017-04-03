@@ -3,6 +3,7 @@ package gray.utils;
 import java.text.MessageFormat;
 
 /**
+ * 字符串工具类
  * Created by Gray
  */
 public class StringUtil {

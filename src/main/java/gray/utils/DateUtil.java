@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
+ * 日期工具类
  * Created by Gray
  */
 public class DateUtil {
