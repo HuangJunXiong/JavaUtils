@@ -1,7 +1,5 @@
 package gray.utils;
 
-import org.apache.commons.lang.StringUtils;
-
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -11,6 +9,25 @@ import java.util.regex.Pattern;
  * Created by Gray
  */
 public class StringUtil {
+
+    /**
+     * 字符串是否为空
+     * @param str
+     * @return
+     */
+    public static boolean isEmpty(String str) {
+        return str == null || str.length() == 0;
+    }
+
+    /**
+     * 字符串是否不为空
+     * @param str
+     * @return
+     */
+    public static boolean isNotEmpty(String str) {
+        return !isEmpty(str);
+    }
+
     /**
      * 返回消息字符串，自动替换{}中的变量
      * @param message
@@ -28,7 +45,7 @@ public class StringUtil {
      * @return
      */
     public static boolean isNumber(String value) {
-        if (StringUtils.isEmpty(value)) return false;
+        if (StringUtil.isEmpty(value)) return false;
         Pattern pattern = Pattern.compile("[0-9]*");
         return pattern.matcher(value).matches();
     }
@@ -39,7 +56,7 @@ public class StringUtil {
      * @return
      */
     public static boolean isEmail(String value) {
-        if (StringUtils.isEmpty(value)) return false;
+        if (StringUtil.isEmpty(value)) return false;
         String style = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
         return value.matches(style);
     }
@@ -48,7 +65,7 @@ public class StringUtil {
      * 判断当前字符串是否为邮政编码
      */
     public static boolean isZip(String value) {
-        if (StringUtils.isEmpty(value)) return false;
+        if (StringUtil.isEmpty(value)) return false;
         String partten = "^[1-9]\\d{5}$";
         return value.matches(partten);
     }
@@ -59,7 +76,7 @@ public class StringUtil {
      * @return
      */
     public static boolean isMobile(String value) {
-        if (StringUtils.isEmpty(value) || value.trim().length() < 11) return false;
+        if (StringUtil.isEmpty(value) || value.trim().length() < 11) return false;
 //		String partten = "^(13[0-9]|15[0|3|6|7|8|9]|18[7|8|9])\\d{8}$";
         String partten = "^0?1[3|4|5|7|8][0-9]\\d{8}$";
         return value.matches(partten);
@@ -69,7 +86,7 @@ public class StringUtil {
      * 判断当前字符串是否为电话号码
      */
     public static boolean isPhone(String value) {
-        if (StringUtils.isEmpty(value) || value.trim().length() < 6) return false;
+        if (StringUtil.isEmpty(value) || value.trim().length() < 6) return false;
 //		String partten = "^([-0|1|2|3|4|5|6|7|8|9|+|.|#|*|(|)]){7,}$";
         String partten = "^(0[0-9]{2,3}\\-)?([2-9][0-9]{6,7})+(\\-[0-9]{1,5})?$";
         return value.matches(partten);
@@ -84,7 +101,7 @@ public class StringUtil {
         for(int i=0; i<stringList.size(); i++){
             sb.append(stringList.get(i) + delimit);
         }
-        if (!StringUtils.isEmpty(sb.toString()))
+        if (!StringUtil.isEmpty(sb.toString()))
             return sb.substring(0, sb.length() - delimit.length());
         return sb.toString();
     }
@@ -101,7 +118,7 @@ public class StringUtil {
                 sb.append(stringArray[i] + delimit);
             }
         }
-        if (!StringUtils.isEmpty(sb.toString()))
+        if (!StringUtil.isEmpty(sb.toString()))
             return sb.substring(0, sb.length() - delimit.length());
         return sb.toString();
     }
@@ -112,7 +129,7 @@ public class StringUtil {
      * @return
      */
     public static String escapeExprSpecialWord(String keyword) {
-        if (StringUtils.isNotBlank(keyword)) {
+        if (StringUtil.isNotEmpty(keyword)) {
             String[] fbsArr = { "\\", "$", "(", ")", "*", "+", ".", "[", "]", "?", "^", "{", "}", "|" };
             for (String key : fbsArr) {
                 if (keyword.contains(key)) {
